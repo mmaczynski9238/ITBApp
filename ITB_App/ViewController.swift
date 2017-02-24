@@ -10,16 +10,51 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet var textField: UITextField!
+    @IBOutlet var binaryLabel: UILabel!
+    
+    let TBC = 1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+
+    }
+ 
+    @IBAction func convertButton(_ sender: UIButton) {
+        main()
+    }
+    
+    
+    func main() -> (){
+        
+        var TBC = Int(textField.text!)
+        var binary = intToBinaryString(TBC!)
+        print( "IntValue( \(TBC) ) => BinaryString( \(binary) )")
+        binaryLabel.text = "\(binary)"
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func intToBinaryString( _ value:Int ) -> String {
+        
+        var result = ""
+        
+        var _value = value
+        
+        while _value > 0 {
+            
+            result = ( _value % 2 != 0 ? "1" : "0" ) + result
+            _value /= 2
+        }
+        
+        while result.characters.count % 8 != 0 {
+            
+            result = "0" + result
+        }
+        
+        return result
     }
-
+    
 
 }
 
